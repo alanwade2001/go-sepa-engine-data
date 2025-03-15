@@ -7,19 +7,19 @@ import (
 	"github.com/alanwade2001/go-sepa-engine-data/repository/entity"
 )
 
-type CreditTransfer struct {
+type Transaction struct {
 	persist *db.Persist
 }
 
-func NewCreditTransfer(persist *db.Persist) *CreditTransfer {
-	ct := &CreditTransfer{
+func NewTransaction(persist *db.Persist) *Transaction {
+	ct := &Transaction{
 		persist: persist,
 	}
 
 	return ct
 }
 
-func (s *CreditTransfer) Perist(entity *entity.Transaction) (*entity.Transaction, error) {
+func (s *Transaction) Perist(entity *entity.Transaction) (*entity.Transaction, error) {
 	log.Printf("entity: [%v]", entity)
 	tx := s.persist.DB.Save(entity)
 	err := tx.Error

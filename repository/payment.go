@@ -27,3 +27,12 @@ func (s *Payment) Perist(entity *entity.Payment) (*entity.Payment, error) {
 
 	return entity, err
 }
+
+func (s *Payment) GetPaymentsByPaymentGroupID(ID uint) ([]*entity.Payment, error) {
+	sl := make([]*entity.Payment, 0)
+	if err := s.persist.DB.Where(&entity.Payment{PaymentGroupID: ID}).Find(sl).Error; err != nil {
+		return nil, err
+	} else {
+		return sl, nil
+	}
+}
