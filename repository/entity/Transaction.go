@@ -14,6 +14,8 @@ type Transaction struct {
 	Iban        string
 	Bic         string
 	CdtTrfTxInf string
+	PaymentID   uint
+	Payment     Payment
 }
 
 func (t Transaction) String() string {

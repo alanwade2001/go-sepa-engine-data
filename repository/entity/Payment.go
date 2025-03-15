@@ -7,14 +7,16 @@ import (
 )
 
 type Payment struct {
-	Model    *gorm.Model `gorm:"embedded"`
-	PmtInfID string
-	CtrlSum  float64
-	NbOfTxs  string
-	Nm       string
-	Iban     string
-	Bic      string
-	PmtInf   string
+	Model          *gorm.Model `gorm:"embedded"`
+	PmtInfID       string
+	CtrlSum        float64
+	NbOfTxs        string
+	Nm             string
+	Iban           string
+	Bic            string
+	PmtInf         string
+	PaymentGroupID uint
+	PaymentGroup   PaymentGroup
 }
 
 func (p Payment) String() string {

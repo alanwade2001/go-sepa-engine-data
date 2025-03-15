@@ -1,5 +1,7 @@
 github.com/alanwade2001/go-sepa-db v0.0.0-20250314181629-ba7d1fd3f464 h1:o7ZDbZUJebYTohdWK9ODIPpB664dwIeKLrL1sF/hcmA=
 github.com/alanwade2001/go-sepa-db v0.0.0-20250314181629-ba7d1fd3f464/go.mod h1:WKfb8qq8cYA0mBlWaA+xyPHxQH7uJBj+wcUzWVEhiSI=
+github.com/alanwade2001/go-sepa-iso v0.0.0-20250314075832-0caa02c0ee73 h1:mG1q+McDf7DWGBydDUdhfQJxZVCrqUslDIbOcSYwX/0=
+github.com/alanwade2001/go-sepa-iso v0.0.0-20250314075832-0caa02c0ee73/go.mod h1:19XC29emxyZqXBavNDTt1BazXHx2JhtpfVhIsK1XDB8=
 github.com/alanwade2001/go-sepa-utils v0.0.0-20250314081604-0992fcffbc2d h1:+YUgtCkwxFAWs378YnRY8CA3YjrCOzs0LI4hZqDTfds=
 github.com/alanwade2001/go-sepa-utils v0.0.0-20250314081604-0992fcffbc2d/go.mod h1:6b/2gv67iiaXUvUzfyV3X3tNhJLzZxe1R859xUIMJbE=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=

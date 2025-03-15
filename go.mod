@@ -4,6 +4,7 @@ go 1.24.1
 
 require (
 	github.com/alanwade2001/go-sepa-db v0.0.0-20250314181629-ba7d1fd3f464
+	github.com/alanwade2001/go-sepa-iso v0.0.0-20250314075832-0caa02c0ee73
 	github.com/alanwade2001/go-sepa-utils v0.0.0-20250314081604-0992fcffbc2d
 	gorm.io/gorm v1.25.12
 )
