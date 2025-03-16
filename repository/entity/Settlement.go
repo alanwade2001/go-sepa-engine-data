@@ -16,5 +16,5 @@ type Settlement struct {
 }
 
 func (t Settlement) String() string {
-	return fmt.Sprintf("ID=[%d], EndToEndID=[%s], TxID=[%s]", t.Model.ID, t.EndToEndID, t.TxID)
+	return fmt.Sprintf("ID=[%v], EndToEndID=[%v], TxID=[%v]", t.Model.ID, t.EndToEndID, t.TxID)
 }
