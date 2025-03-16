@@ -25,3 +25,13 @@ func (s *Transaction) Perist(entity *entity.Transaction) (*entity.Transaction, e
 	err := tx.Error
 	return entity, err
 }
+
+func (s *Transaction) GetTransactionsByPaymentID(ID uint) ([]*entity.Transaction, error) {
+
+	var transactions []*entity.Transaction
+	if err := s.persist.DB.Where(&entity.Transaction{PaymentID: ID}).Find(&transactions).Error; err != nil {
+		return nil, err
+	} else {
+		return transactions, nil
+	}
+}
