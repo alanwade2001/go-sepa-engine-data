@@ -64,3 +64,22 @@ func (p Payment) ToEntity() (ent *entity.Payment, err error) {
 	}
 
 }
+
+func (p *Payment) FromEntity(ent *entity.Payment) error {
+	p.CtrlSum = ent.CtrlSum
+	p.DbtrAcc = &Account{
+		Nm:   ent.Nm,
+		Iban: ent.Iban,
+		Bic:  ent.Bic,
+	}
+	p.ID = ent.Model.ID
+	p.NbOfTxs = ent.NbOfTxs
+	p.PmtInfId = ent.PmtInfID
+	p.PmtInf = &pain_001_001_03.PaymentInstructionInformation3{}
+
+	if err := xml.Unmarshal([]byte(ent.PmtInf), p.PmtInf); err != nil {
+		return err
+	}
+
+	return nil
+}
