@@ -12,7 +12,7 @@ type Settlement struct {
 	TxID          string
 	CdtTrfTxInf   string
 	TransactionID uint
-	Transaction   Transaction
+	Transaction   *Transaction
 }
 
 func (t Settlement) String() string {

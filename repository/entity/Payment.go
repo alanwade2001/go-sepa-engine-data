@@ -16,7 +16,7 @@ type Payment struct {
 	Bic            string
 	PmtInf         string
 	PaymentGroupID uint
-	PaymentGroup   PaymentGroup
+	PaymentGroup   *PaymentGroup
 }
 
 func (p Payment) String() string {

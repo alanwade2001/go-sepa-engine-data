@@ -15,7 +15,7 @@ type Transaction struct {
 	Bic         string
 	CdtTrfTxInf string
 	PaymentID   uint
-	Payment     Payment
+	Payment     *Payment
 }
 
 func (t Transaction) String() string {
