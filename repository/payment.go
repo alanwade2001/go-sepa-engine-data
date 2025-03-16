@@ -28,9 +28,9 @@ func (s *Payment) Perist(entity *entity.Payment) (*entity.Payment, error) {
 	return entity, err
 }
 
-func (s *Payment) GetPaymentsByPaymentGroupID(ID uint) ([]entity.Payment, error) {
+func (s *Payment) GetPaymentsByPaymentGroupID(ID uint) ([]*entity.Payment, error) {
 
-	var payments []entity.Payment
+	var payments []*entity.Payment
 	if err := s.persist.DB.Where(&entity.Payment{PaymentGroupID: ID}).Find(&payments).Error; err != nil {
 		return nil, err
 	} else {
