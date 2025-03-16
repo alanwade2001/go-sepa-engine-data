@@ -5,7 +5,7 @@ import (
 	"fmt"
 
 	"github.com/alanwade2001/go-sepa-engine-data/repository/entity"
-	"github.com/alanwade2001/go-sepa-iso/gen"
+	"github.com/alanwade2001/go-sepa-iso/pain_001_001_03"
 	"gorm.io/gorm"
 )
 
@@ -17,7 +17,7 @@ type PaymentGroup struct {
 	NbOfTxs string
 	State   string
 	DocID   uint
-	GrpHdr  *gen.GroupHeader32
+	GrpHdr  *pain_001_001_03.GroupHeader32
 }
 
 func (i PaymentGroup) String() string {

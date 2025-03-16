@@ -4,7 +4,8 @@ import (
 	"encoding/xml"
 
 	"github.com/alanwade2001/go-sepa-engine-data/repository/entity"
-	"github.com/alanwade2001/go-sepa-iso/gen"
+	"github.com/alanwade2001/go-sepa-iso/pain_001_001_03"
+
 	"gorm.io/gorm"
 )
 
@@ -13,10 +14,10 @@ type CreditTransfer struct {
 	EndToEndID  string
 	Amt         float64
 	CdtrAcc     *Account
-	CdtTrfTxInf *gen.CreditTransferTransactionInformation10
+	CdtTrfTxInf *pain_001_001_03.CreditTransferTransactionInformation10
 }
 
-func NewCreditTransfer(txInf *gen.CreditTransferTransactionInformation10) *CreditTransfer {
+func NewCreditTransfer(txInf *pain_001_001_03.CreditTransferTransactionInformation10) *CreditTransfer {
 
 	tx := &CreditTransfer{
 		EndToEndID:  txInf.PmtId.EndToEndId,
@@ -28,7 +29,7 @@ func NewCreditTransfer(txInf *gen.CreditTransferTransactionInformation10) *Credi
 	return tx
 }
 
-func NewCreditTransfers(txInves []*gen.CreditTransferTransactionInformation10) []*CreditTransfer {
+func NewCreditTransfers(txInves []*pain_001_001_03.CreditTransferTransactionInformation10) []*CreditTransfer {
 	txs := []*CreditTransfer{}
 
 	for _, txInf := range txInves {

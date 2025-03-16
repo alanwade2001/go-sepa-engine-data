@@ -4,7 +4,7 @@ import (
 	"encoding/xml"
 
 	"github.com/alanwade2001/go-sepa-engine-data/repository/entity"
-	"github.com/alanwade2001/go-sepa-iso/gen"
+	"github.com/alanwade2001/go-sepa-iso/pain_001_001_03"
 	"gorm.io/gorm"
 )
 
@@ -14,10 +14,10 @@ type Payment struct {
 	CtrlSum  float64
 	NbOfTxs  string
 	DbtrAcc  *Account
-	PmtInf   *gen.PaymentInstructionInformation3
+	PmtInf   *pain_001_001_03.PaymentInstructionInformation3
 }
 
-func NewPayment(pmtInf *gen.PaymentInstructionInformation3) *Payment {
+func NewPayment(pmtInf *pain_001_001_03.PaymentInstructionInformation3) *Payment {
 
 	pmt := &Payment{
 		PmtInfId: pmtInf.PmtInfId,
@@ -30,7 +30,7 @@ func NewPayment(pmtInf *gen.PaymentInstructionInformation3) *Payment {
 	return pmt
 }
 
-func NewPayments(pmtInves []*gen.PaymentInstructionInformation3) []*Payment {
+func NewPayments(pmtInves []*pain_001_001_03.PaymentInstructionInformation3) []*Payment {
 	pmts := []*Payment{}
 
 	for _, pmtInf := range pmtInves {
