@@ -7,6 +7,7 @@ type Manager struct {
 	Payment      *Payment
 	Transaction  *Transaction
 	Settlement   *Settlement
+	Execution    *Execution
 }
 
 func NewManager(p *db.Persist) *Manager {
@@ -15,6 +16,7 @@ func NewManager(p *db.Persist) *Manager {
 		Payment:      NewPayment(p),
 		Transaction:  NewTransaction(p),
 		Settlement:   NewSettlement(p),
+		Execution:    NewExecution(p),
 	}
 
 	return manager
