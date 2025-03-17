@@ -2,6 +2,8 @@ package model
 
 import (
 	"encoding/xml"
+	"strconv"
+	"time"
 
 	"github.com/alanwade2001/go-sepa-engine-data/repository/entity"
 	"github.com/alanwade2001/go-sepa-iso/pain_001_001_03"
@@ -9,22 +11,27 @@ import (
 )
 
 type Payment struct {
-	ID       uint
-	PmtInfId string
-	CtrlSum  float64
-	NbOfTxs  string
-	DbtrAcc  *Account
-	PmtInf   *pain_001_001_03.PaymentInstructionInformation3
+	ID          uint
+	PmtInfId    string
+	CtrlSum     float64
+	NbOfTxs     uint
+	ReqdExctnDt *time.Time
+	DbtrAcc     *Account
+	PmtInf      *pain_001_001_03.PaymentInstructionInformation3
 }
 
 func NewPayment(pmtInf *pain_001_001_03.PaymentInstructionInformation3) *Payment {
 
+	nbOfTxs, _ := strconv.ParseUint(pmtInf.NbOfTxs, 10, 64)
+	reqdExctnDt, _ := time.Parse("2006-01-02", pmtInf.ReqdExctnDt)
+
 	pmt := &Payment{
-		PmtInfId: pmtInf.PmtInfId,
-		CtrlSum:  pmtInf.CtrlSum,
-		NbOfTxs:  pmtInf.NbOfTxs,
-		DbtrAcc:  &Account{Nm: pmtInf.Dbtr.Nm, Iban: pmtInf.DbtrAcct.Id.IBAN, Bic: pmtInf.DbtrAgt.FinInstnId.BIC},
-		PmtInf:   pmtInf,
+		PmtInfId:    pmtInf.PmtInfId,
+		CtrlSum:     pmtInf.CtrlSum,
+		NbOfTxs:     uint(nbOfTxs),
+		ReqdExctnDt: &reqdExctnDt,
+		DbtrAcc:     &Account{Nm: pmtInf.Dbtr.Nm, Iban: pmtInf.DbtrAcct.Id.IBAN, Bic: pmtInf.DbtrAgt.FinInstnId.BIC},
+		PmtInf:      pmtInf,
 	}
 
 	return pmt
@@ -51,13 +58,14 @@ func (p Payment) ToEntity() (ent *entity.Payment, err error) {
 			Model: &gorm.Model{
 				ID: p.ID,
 			},
-			PmtInfID: p.PmtInfId,
-			CtrlSum:  p.CtrlSum,
-			NbOfTxs:  p.NbOfTxs,
-			Nm:       p.DbtrAcc.Nm,
-			Iban:     p.DbtrAcc.Iban,
-			Bic:      p.DbtrAcc.Bic,
-			PmtInf:   string(bytes),
+			PmtInfID:    p.PmtInfId,
+			CtrlSum:     p.CtrlSum,
+			NbOfTxs:     p.NbOfTxs,
+			ReqdExctnDt: p.ReqdExctnDt,
+			Nm:          p.DbtrAcc.Nm,
+			Iban:        p.DbtrAcc.Iban,
+			Bic:         p.DbtrAcc.Bic,
+			PmtInf:      string(bytes),
 		}
 
 		return ent, nil
@@ -75,6 +83,7 @@ func (p *Payment) FromEntity(ent *entity.Payment) error {
 	p.ID = ent.Model.ID
 	p.NbOfTxs = ent.NbOfTxs
 	p.PmtInfId = ent.PmtInfID
+	p.ReqdExctnDt = ent.ReqdExctnDt
 	p.PmtInf = &pain_001_001_03.PaymentInstructionInformation3{}
 
 	if err := xml.Unmarshal([]byte(ent.PmtInf), p.PmtInf); err != nil {
