@@ -1,6 +1,8 @@
 package repository
 
 import (
+	"log/slog"
+
 	db "github.com/alanwade2001/go-sepa-db"
 	"github.com/alanwade2001/go-sepa-engine-data/repository/entity"
 )
@@ -18,6 +20,7 @@ func NewSettlement(persist *db.Persist) *Settlement {
 }
 
 func (s *Settlement) Perist(entity *entity.Settlement) (*entity.Settlement, error) {
+	slog.Debug("settlement", "entity", entity)
 	tx := s.persist.DB.Save(entity)
 	err := tx.Error
 	return entity, err

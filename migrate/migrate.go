@@ -27,6 +27,8 @@ func main() {
 	migrate(persist.DB, &entity.Payment{}, "Payments")
 	migrate(persist.DB, &entity.Transaction{}, "Transactions")
 	migrate(persist.DB, &entity.Settlement{}, "Settlement")
+	migrate(persist.DB, &entity.SettlementGroup{}, "SettlementGroup")
+	migrate(persist.DB, &entity.Execution{}, "Execution")
 
 }
 

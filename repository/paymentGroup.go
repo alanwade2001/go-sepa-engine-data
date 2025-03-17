@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"log"
+	"log/slog"
 
 	db "github.com/alanwade2001/go-sepa-db"
 	"github.com/alanwade2001/go-sepa-engine-data/repository/entity"
@@ -20,7 +20,7 @@ func NewPaymentGroup(persist *db.Persist) *PaymentGroup {
 }
 
 func (s *PaymentGroup) Perist(entity *entity.PaymentGroup) (*entity.PaymentGroup, error) {
-	log.Printf("entity: [%v]", entity)
+	slog.Debug("paymentGroup", "entity", entity)
 	tx := s.persist.DB.Save(entity)
 	err := tx.Error
 	return entity, err
