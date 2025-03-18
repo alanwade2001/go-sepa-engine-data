@@ -26,7 +26,7 @@ func (p *Execution) FromEntity(ent *entity.Execution, sgps []*entity.SettlementG
 
 	p.ID = ent.Model.ID
 
-	p.SettlementGroups = make([]*SettlementGroup, len(sgps))
+	p.SettlementGroups = []*SettlementGroup{}
 
 	for _, sgp := range sgps {
 		sg := &SettlementGroup{
