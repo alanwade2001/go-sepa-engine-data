@@ -8,6 +8,7 @@ import (
 
 type Settlement struct {
 	Model             *gorm.Model `gorm:"embedded"`
+	Amount            float64
 	EndToEndID        string
 	TxID              string
 	CdtTrfTxInf       string
