@@ -41,10 +41,10 @@ func (s *Settlement) FindSettlementsBySettlementGroupID(ID uint) ([]*entity.Sett
 	}
 }
 
-func (s *Settlement) SumSettlementAmountBySettlementGroupID(ID uint) (float64, error) {
-	var sum float64
+func (s *Settlement) SumSettlementAmountBySettlementGroupID(ID uint) (*float64, error) {
+	var sum *float64
 	if err := s.persist.DB.Model(&Settlement{}).Select("sum(amount)").Row().Scan(&sum); err != nil {
-		return 0, err
+		return nil, err
 	} else {
 		return sum, nil
 	}
