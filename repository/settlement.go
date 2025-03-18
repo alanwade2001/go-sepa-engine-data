@@ -27,7 +27,17 @@ func (s *Settlement) Perist(entity *entity.Settlement) (*entity.Settlement, erro
 }
 
 func (s *Settlement) UpdateSettlementGroup(sg *entity.SettlementGroup) (int64, error) {
-	tx := s.persist.DB.Model(Settlement{}).Where("settlement_group_id IS NULL").UpdateColumn("settlement_group_id", sg.Model.ID)
+	//tx := s.persist.DB.Model(Settlement{}).Where("settlement_group_id IS NULL").UpdateColumn("settlement_group_id", sg.Model.ID)
+	tx := s.persist.DB.Where(&entity.Settlement{SettlementGroup: nil}).Updates(&entity.Settlement{SettlementGroupID: sg.Model.ID})
 
 	return tx.RowsAffected, tx.Error
+}
+
+func (s *Settlement) FindSettlementsBySettlementGroupID(ID uint) ([]*entity.Settlement, error) {
+	var settlements []*entity.Settlement
+	if err := s.persist.DB.Where(&entity.Settlement{SettlementGroupID: ID}).Find(&settlements).Error; err != nil {
+		return nil, err
+	} else {
+		return settlements, nil
+	}
 }
