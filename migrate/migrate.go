@@ -1,4 +1,4 @@
-package main
+package migrate
 
 import (
 	"log"
@@ -23,16 +23,16 @@ func main() {
 
 	//persist.DB.AutoMigrate(&entity.PaymentGroup{})
 	//log.Printf("created table: [%s]", "PaymentGroup")
-	migrate(persist.DB, &entity.PaymentGroup{}, "PaymentGroups")
-	migrate(persist.DB, &entity.Payment{}, "Payments")
-	migrate(persist.DB, &entity.Transaction{}, "Transactions")
-	migrate(persist.DB, &entity.Settlement{}, "Settlement")
-	migrate(persist.DB, &entity.SettlementGroup{}, "SettlementGroup")
-	migrate(persist.DB, &entity.Execution{}, "Execution")
+	Migrate(persist.DB, &entity.PaymentGroup{}, "PaymentGroups")
+	Migrate(persist.DB, &entity.Payment{}, "Payments")
+	Migrate(persist.DB, &entity.Transaction{}, "Transactions")
+	Migrate(persist.DB, &entity.Settlement{}, "Settlement")
+	Migrate(persist.DB, &entity.SettlementGroup{}, "SettlementGroup")
+	Migrate(persist.DB, &entity.Execution{}, "Execution")
 
 }
 
-func migrate(db *gorm.DB, i interface{}, tableName string) {
+func Migrate(db *gorm.DB, i interface{}, tableName string) {
 	if err := db.AutoMigrate(i); err != nil {
 		log.Fatalf("cannot create table: [%s], error:[%v]", tableName, err)
 	} else {

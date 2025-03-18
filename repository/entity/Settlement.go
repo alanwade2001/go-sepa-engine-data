@@ -14,7 +14,7 @@ type Settlement struct {
 	CdtTrfTxInf       string
 	TransactionID     uint
 	Transaction       *Transaction
-	SettlementGroupID uint
+	SettlementGroupID *uint
 	SettlementGroup   *SettlementGroup
 }
 

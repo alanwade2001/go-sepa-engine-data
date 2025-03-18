@@ -34,18 +34,21 @@ func (s *Settlement) UpdateSettlementGroup(sg *entity.SettlementGroup) (int64, e
 
 func (s *Settlement) FindSettlementsBySettlementGroupID(ID uint) ([]*entity.Settlement, error) {
 	var settlements []*entity.Settlement
-	if err := s.persist.DB.Where(&entity.Settlement{SettlementGroupID: ID}).Find(&settlements).Error; err != nil {
+	if err := s.persist.DB.Where(&entity.Settlement{SettlementGroupID: &ID}).Find(&settlements).Error; err != nil {
 		return nil, err
 	} else {
 		return settlements, nil
 	}
 }
 
-func (s *Settlement) SumSettlementAmountBySettlementGroupID(ID uint) (*float64, error) {
+func (s *Settlement) SumSettlementAmountBySettlementGroupID(ID uint) (float64, error) {
 	var sum *float64
-	if err := s.persist.DB.Model(&Settlement{}).Select("sum(amount)").Row().Scan(&sum); err != nil {
-		return nil, err
+	if err := s.persist.DB.Model(&Settlement{}).Where(&entity.Settlement{SettlementGroupID: &ID}).Select("sum(amount)").Row().Scan(&sum); err != nil {
+		return 0.0, err
 	} else {
-		return sum, nil
+		if sum == nil {
+			return 0.0, nil
+		}
+		return *sum, nil
 	}
 }
