@@ -6,7 +6,8 @@ import (
 )
 
 type Execution struct {
-	ID uint
+	ID               uint
+	SettlementGroups []*SettlementGroup
 }
 
 func (p Execution) ToEntity() (ent *entity.Execution, err error) {
@@ -21,9 +22,23 @@ func (p Execution) ToEntity() (ent *entity.Execution, err error) {
 
 }
 
-func (p *Execution) FromEntity(ent *entity.Execution) error {
+func (p *Execution) FromEntity(ent *entity.Execution, sgps []*entity.SettlementGroup) error {
 
 	p.ID = ent.Model.ID
+
+	p.SettlementGroups = make([]*SettlementGroup, len(sgps))
+
+	for _, sgp := range sgps {
+		sg := &SettlementGroup{
+			ID:      sgp.Model.ID,
+			MsgID:   sgp.MsgID,
+			CtrlSum: sgp.CtrlSum,
+			CreDtTm: sgp.CreDtTm,
+			NbOfTxs: sgp.NbOfTxs,
+		}
+
+		p.SettlementGroups = append(p.SettlementGroups, sg)
+	}
 
 	return nil
 }
