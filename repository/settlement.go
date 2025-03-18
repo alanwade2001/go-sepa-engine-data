@@ -25,3 +25,9 @@ func (s *Settlement) Perist(entity *entity.Settlement) (*entity.Settlement, erro
 	err := tx.Error
 	return entity, err
 }
+
+func (s *Settlement) UpdateSettlementGroup(sg *entity.SettlementGroup) (int64, error) {
+	tx := s.persist.DB.Model(Settlement{}).Where("SettlementGroup = ?", nil).UpdateColumn("SettlementGroup", sg)
+
+	return tx.RowsAffected, tx.Error
+}
