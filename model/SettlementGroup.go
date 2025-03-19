@@ -14,6 +14,7 @@ type SettlementGroup struct {
 	CtrlSum float64
 	CreDtTm *time.Time
 	NbOfTxs uint
+	GrpHdr  *pacs_008_001_02.GroupHeader33
 }
 
 func (sg *SettlementGroup) FromEntity(ent *entity.SettlementGroup) error {
@@ -28,6 +29,7 @@ func (sg *SettlementGroup) FromEntity(ent *entity.SettlementGroup) error {
 	sg.CtrlSum = ent.CtrlSum
 	sg.MsgID = ent.MsgID
 	sg.NbOfTxs = ent.NbOfTxs
+	sg.GrpHdr = gh
 
 	return nil
 
