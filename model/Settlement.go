@@ -22,6 +22,7 @@ func (s *Settlement) FromEntity(ent *entity.Settlement) error {
 		return err
 	}
 
+	s.ID = ent.Model.ID
 	s.Amount = ent.Amount
 	s.CdtTrfTxInf = cdtTrfTxInf
 	s.EndToEndID = ent.EndToEndID
