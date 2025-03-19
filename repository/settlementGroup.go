@@ -25,3 +25,12 @@ func (s *SettlementGroup) Perist(entity *entity.SettlementGroup) (*entity.Settle
 	err := tx.Error
 	return entity, err
 }
+
+func (s *SettlementGroup) FindByID(id string) (*entity.SettlementGroup, error) {
+	sg := &entity.SettlementGroup{}
+	if err := s.persist.DB.First(sg, id).Error; err != nil {
+		return nil, err
+	}
+
+	return sg, nil
+}
